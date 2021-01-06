@@ -7,6 +7,7 @@ import id.ten.app.democacheaside.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,11 @@ public class ProductServiceImpl implements ProductService {
                 .findById(productDto.getId())
                 .map(p -> this.setQuantityAvailable(p, productDto))
                 .ifPresent(this.productRepository::save);
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return productRepository.findAll();
     }
 
     private ProductDto entityToDto(Product product){
